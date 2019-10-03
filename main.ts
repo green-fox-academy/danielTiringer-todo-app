@@ -14,7 +14,18 @@ const args: string[] = process.argv;
 
 console.log(process.argv);
 
-console.log(fs.readFileSync('./taskList.txt', 'utf-8'));
+
+if (args.length = 2) {
+
+   console.log('Welcome to Daniel\'s To-Do Application!');
+   console.log('=======================================');
+   console.log('');
+   console.log('Please use the following arguments to access the functions of this app:');
+   console.log(fs.readFileSync('./arguments.txt', 'utf-8'));
+
+}
+
+
 
 
 
