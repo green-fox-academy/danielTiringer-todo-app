@@ -1,7 +1,8 @@
 'use strict'
 
 const fs = require('fs');
-import { taskList } from './taskListFunction'
+import { taskList } from './taskListFunction';
+import { listArguments } from './listArgumentFunction';
 // let fileContent = fs.readFileSync('/path/to/myfile', 'utf-8');
 // console.log(fileContent);
 
@@ -11,16 +12,11 @@ import { taskList } from './taskListFunction'
 
 let args: string[] = process.argv;
 
-let argumentsList: string = fs.readFileSync('./arguments.txt', 'utf-8');
 
 let mainProcess = () => {
 
    if (!args[2]) {
-	console.log('Welcome to Daniel\'s To-Do Application!');
-	console.log('=======================================');
-	console.log('');
-	console.log('Please use the following arguments to access the functions of this app:');
-	console.log(argumentsList);
+	   listArguments()
    } else if (args[2] == '-l') {
 	   taskList();
    }
