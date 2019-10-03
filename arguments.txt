@@ -1,4 +1,4 @@
-    -l   Lists existing tasks
-    -a   Adds a new task
-    -r   Removes an existing task
-    -c   Completes an existing task
+-l   Lists existing tasks
+-a   Adds a new task
+-r   Removes an existing task
+-c   Completes an existing task
