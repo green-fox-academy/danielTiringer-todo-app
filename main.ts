@@ -23,6 +23,9 @@ let mainProcess = () => {
 	} else if (args[2] == '-r') {
 		danielsToDoList.removeTaskFromTheList(args[3]);
 		danielsToDoList.getTaskList();
+	} else if (args[2] == '-c') {
+		danielsToDoList.completeTask(args[3]);
+		danielsToDoList.getTaskList();
 	}
 }
 

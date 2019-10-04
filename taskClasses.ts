@@ -11,7 +11,7 @@ export class taskList {
 
 	private readTaskList(): void {
 		this._listOfTasks = fs.readFileSync('taskList.txt', 'utf8').split('\n');
-		console.log(this._listOfTasks);
+		// console.log(this._listOfTasks);
 	}
 
 	public addTaskToTheList(newTask: string): void {
@@ -26,7 +26,15 @@ export class taskList {
 		fs.writeFileSync('./taskList.txt', this._listOfTasks.join('\n'))
 	}
 
-	public getTaskList (): void {
+	public completeTask(taskID: any): void {
+		this.readTaskList();
+		if(this._listOfTasks.length >= taskID) {
+			this._listOfTasks[taskID-1] = this._listOfTasks[taskID-1].slice(0,-1) + '1';
+		}
+		fs.writeFileSync('./taskList.txt', this._listOfTasks.join('\n'));
+	}
+
+	public getTaskList(): void {
 		this.readTaskList();
 		if (this._listOfTasks.length == 0) {
 			console.log('No todos for today!')
