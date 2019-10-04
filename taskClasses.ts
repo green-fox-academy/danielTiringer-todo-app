@@ -2,48 +2,37 @@
 
 const fs = require('fs');
 
-export class toDoTask {
-	private _description: string;
-	private _isCompleted: boolean;
-
-	constructor(description: string){
-		this._description = description;
-		this._isCompleted = false;
-	}
-
-	public getDescription (): string {
-		return this._description;
-	}
-
-	public completeTask (): void {
-		this._isCompleted = true;
-	}
-}
-
 export class taskList {
-	private _listOfTasks: toDoTask [];
+	private _listOfTasks: string [];
 
 	constructor(){
 		this._listOfTasks = [];
 	}
 
-	public addTaskToTheList(newTask: toDoTask): void {
-		this._listOfTasks.push(newTask);
+	private readTaskList(): void {
+		this._listOfTasks = fs.readFileSync('taskList.txt', 'utf8').split('\n');
+		console.log(this._listOfTasks);
+	}
+
+	public addTaskToTheList(newTask: string): void {
+		fs.appendFileSync('./taskList.txt', ('\n' + newTask + ',0'))
 	}
 
 	public removeTaskFromTheList(taskID: any): void {
+		this.readTaskList();
 		if(this._listOfTasks.length >= 2) {
 			this._listOfTasks.splice(taskID - 1, 1);
 		}
+		fs.writeFileSync('./taskList.txt', this._listOfTasks.join('\n'))
 	}
 
-
 	public getTaskList (): void {
+		this.readTaskList();
 		if (this._listOfTasks.length == 0) {
 			console.log('No todos for today!')
 		} else {
 			for (let i: number = 0; i < this._listOfTasks.length; i++){
-				console.log(`${i + 1} - ${this._listOfTasks[i].getDescription()}`)
+				console.log(`${i + 1} - ${this._listOfTasks[i].slice(0, -2)}`);
 			}
 		}
 	}
