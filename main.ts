@@ -14,9 +14,9 @@ let danielsToDoList = new taskList;
 
 let mainProcess = () => {
 	if (!args[2]) {
-		listFunctions.listArguments()
+		listFunctions.listArguments();
 	} else if (args[2] == '-l') {
-		danielsToDoList.getTaskList();
+		danielsToDoList.printAllTasks();
 	} else if (args[2] == '-a') {
 		danielsToDoList.addTaskToTheList(args[3]);
 		danielsToDoList.getTaskList();

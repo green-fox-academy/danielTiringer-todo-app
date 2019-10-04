@@ -11,7 +11,10 @@ export class taskList {
 
 	private readTaskList(): void {
 		this._listOfTasks = fs.readFileSync('taskList.txt', 'utf8').split('\n');
-		// console.log(this._listOfTasks);
+	}
+
+	private writeTaskList(): void {
+		fs.writeFileSync('./taskList.txt', this._listOfTasks.join('\n'))
 	}
 
 	public addTaskToTheList(newTask: string): void {
@@ -23,7 +26,7 @@ export class taskList {
 		if(this._listOfTasks.length >= 2) {
 			this._listOfTasks.splice(taskID - 1, 1);
 		}
-		fs.writeFileSync('./taskList.txt', this._listOfTasks.join('\n'))
+		this.writeTaskList();
 	}
 
 	public completeTask(taskID: any): void {
@@ -31,7 +34,7 @@ export class taskList {
 		if(this._listOfTasks.length >= taskID) {
 			this._listOfTasks[taskID-1] = this._listOfTasks[taskID-1].slice(0,-1) + '1';
 		}
-		fs.writeFileSync('./taskList.txt', this._listOfTasks.join('\n'));
+		this.writeTaskList();
 	}
 
 	public getTaskList(): void {
@@ -43,6 +46,24 @@ export class taskList {
 				console.log(`${i + 1} - ${this._listOfTasks[i].slice(0, -2)}`);
 			}
 		}
+	}
+
+	public printAllTasks(): void {
+		this.readTaskList();
+		let allTasks: string [] = [];
+		let line: string [] = [];
+		for (let i: number = 0; i < this._listOfTasks.length; i++){
+			line.push(`${i + 1}`);
+			if (this._listOfTasks[i].substr(-1,1) == '1') {
+				line.push(' - [X]');
+			} else {
+				line.push(' - [ ]');
+			}
+			line.push(this._listOfTasks[i].slice(0, -2));
+			allTasks.push(line.join(' '));
+			line = [];
+		}
+		console.log(allTasks.join('\n'));
 	}
 }
 
